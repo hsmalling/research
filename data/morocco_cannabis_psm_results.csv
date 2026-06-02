@@ -1,0 +1,9 @@
+metric,value
+N treated,137.0
+N matched controls,137.0
+Mean income legal,3234.875912408759
+Mean income matched control,2147.5693430656934
+ATT USD,1087.3065693430658
+ATT pct,50.6296373085172
+t-stat,3.8635028365222377
+p-value,0.00013979465912545379
