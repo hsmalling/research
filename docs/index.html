@@ -1,25 +1,536 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8">
-<title>Legal Cooperative Adoption Under Law 13-21: Evidence from Rif Farmer Households</title>
-<style>body{font-family:Georgia,serif;max-width:800px;margin:4rem auto;padding:0 2rem;color:#2C2C2A}
-h1{color:#2C4A7C}p{line-height:1.7}.tag{background:#E6F1FB;color:#0C447C;padding:3px 9px;border-radius:12px;font-size:13px}</style>
-</head><body>
-<h1>Legal Cooperative Adoption Under Law 13-21: Evidence from Rif Farmer Households</h1>
-<p><strong>Your Name</strong> &mdash; Your University</p>
-<p><span class="tag">Morocco</span> <span class="tag">Cannabis</span>
-<span class="tag">Law 13-21</span> <span class="tag">Rif Region</span>
-<span class="tag">Logistic Regression</span> <span class="tag">PSM</span></p>
-<hr>
-<h2>Abstract</h2>
-<p>This study examines the determinants of legal cooperative adoption among cannabis
-farmers in Morocco's Rif region following the enactment of Law 13-21 (2021).
-Using a household survey of 800 farmers across Chefchaouen, Al-Hoceima, and
-Ouazzane provinces, we estimate logistic regression and propensity score matching
-models to identify barriers to formalization and quantify the income effect of
-joining the legal market.</p>
-<h2>Data and Code</h2>
-<p>All data and analysis code are openly available on
-<a href="https://github.com/hsmalling/research">GitHub</a>.
-Full results will be posted here upon journal acceptance.</p>
-<p><em>Last updated: 2026-06-02</em></p>
-</body></html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Research on Morocco cannabis Law 13-21 and Rif farmer livelihoods — logistic regression, PSM, open data">
+<title>Morocco Cannabis Research — Legal Cooperative Adoption Under Law 13-21</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:        #1A1814;
+  --ink2:       #3D3A35;
+  --ink3:       #6B6760;
+  --paper:      #FAF8F4;
+  --paper2:     #F2EFE8;
+  --paper3:     #E8E3D8;
+  --rule:       #D4CEBC;
+  --blue:       #1B3F6E;
+  --blue2:      #2C5FA8;
+  --bl:         #EAF0FA;
+  --red:        #B83232;
+  --rl:         #FAECE7;
+  --green:      #1A6B4A;
+  --gl:         #E4F2EC;
+  --amber:      #8B5E0A;
+  --al:         #FDF3DC;
+  --serif:      'Playfair Display', Georgia, serif;
+  --body:       'Source Serif 4', Georgia, serif;
+  --mono:       'JetBrains Mono', monospace;
+  --r:          5px;
+  --shadow:     0 2px 16px rgba(26,24,20,.10);
+  --shadow-lg:  0 8px 40px rgba(26,24,20,.16);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--body);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.75;
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HEADER ── */
+header { background: var(--blue); color: white; position: relative; overflow: hidden; }
+.hx {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,.03) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,.03) 40px);
+}
+.hi { position: relative; max-width: 900px; margin: 0 auto; padding: 3.5rem 2rem 3rem; }
+.kicker {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .15em;
+  text-transform: uppercase; color: rgba(255,255,255,.55);
+  margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;
+}
+.kicker::before { content:''; display:block; width:28px; height:1px; background:rgba(255,255,255,.4); }
+h1 {
+  font-family: var(--serif); font-size: clamp(1.6rem, 4vw, 2.6rem);
+  font-weight: 700; line-height: 1.2; margin-bottom: 1.25rem; letter-spacing: -.01em;
+}
+.hmeta {
+  font-size: 14px; color: rgba(255,255,255,.7);
+  display: flex; flex-wrap: wrap; gap: 6px 20px; margin-bottom: 1.5rem;
+}
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+  color: rgba(255,255,255,.85); font-family: var(--mono); font-size: 10.5px;
+  padding: 3px 10px; border-radius: 20px; letter-spacing: .04em;
+}
+
+/* ── NAV ── */
+nav {
+  background: var(--blue); border-top: 1px solid rgba(255,255,255,.1);
+  position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,.25);
+}
+.ni {
+  max-width: 900px; margin: 0 auto; padding: 0 2rem;
+  display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+.ni::-webkit-scrollbar { display: none; }
+nav a {
+  color: rgba(255,255,255,.65); text-decoration: none;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .08em;
+  text-transform: uppercase; padding: 14px 16px;
+  border-bottom: 2px solid transparent; white-space: nowrap;
+  transition: color .15s, border-color .15s;
+}
+nav a:hover { color: white; border-bottom-color: rgba(255,255,255,.4); }
+
+/* ── MAIN ── */
+main { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+section { margin: 3.5rem 0; }
+section:first-child { margin-top: 3rem; }
+
+h2 {
+  font-family: var(--serif); font-size: 1.55rem; font-weight: 600;
+  color: var(--blue); margin-bottom: 1.25rem; padding-bottom: .5rem;
+  border-bottom: 2px solid var(--blue); display: flex; align-items: center; gap: 10px;
+}
+.sn { font-family: var(--mono); font-size: 11px; color: var(--ink3); font-weight: 400; letter-spacing: .1em; }
+h3 { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 .5rem; }
+p { margin-bottom: 1rem; color: var(--ink2); }
+a { color: var(--blue2); }
+
+/* ── STAT GRID ── */
+.sg { display: grid; grid-template-columns: repeat(auto-fill, minmax(165px,1fr)); gap: 12px; margin: 1.5rem 0; }
+.stat {
+  background: white; border: 1px solid var(--rule); border-radius: var(--r);
+  padding: 1.1rem 1.25rem; box-shadow: var(--shadow);
+  transition: transform .2s, box-shadow .2s;
+}
+.stat:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.sv { font-family: var(--serif); font-size: 1.9rem; font-weight: 700; color: var(--blue); line-height: 1; margin-bottom: 4px; }
+.sv.g { color: var(--green); }
+.sv.a { color: var(--amber); }
+.sl { font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink3); }
+
+/* ── FIGURE GRID ── */
+.fg { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 16px; margin-top: 1.25rem; }
+.fc {
+  background: white; border: 1px solid var(--rule); border-radius: var(--r);
+  overflow: hidden; box-shadow: var(--shadow); cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+}
+.fc:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.fp {
+  height: 170px; background-color: var(--paper2);
+  background-size: contain; background-repeat: no-repeat; background-position: center;
+  position: relative; border-bottom: 1px solid var(--rule);
+}
+.fo {
+  position: absolute; inset: 0; background: rgba(27,63,110,0);
+  display: flex; align-items: center; justify-content: center; transition: background .2s;
+}
+.fo span { color: white; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; opacity: 0; transition: opacity .2s; }
+.fc:hover .fo { background: rgba(27,63,110,.55); }
+.fc:hover .fo span { opacity: 1; }
+.fb { padding: 1rem 1.1rem 1.1rem; }
+.fn { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink3); margin-bottom: 3px; }
+.ft { font-family: var(--serif); font-size: .95rem; font-weight: 600; margin-bottom: 5px; line-height: 1.35; }
+p.fd { font-size: 12px; line-height: 1.55; color: var(--ink3); margin-bottom: 8px; }
+a.fdl { font-family: var(--mono); font-size: 10.5px; color: var(--blue2); text-decoration: none; letter-spacing: .04em; }
+a.fdl:hover { text-decoration: underline; }
+
+/* ── MODAL ── */
+.modal {
+  display: none; position: fixed; inset: 0;
+  background: rgba(26,24,20,.88); z-index: 1000;
+  align-items: center; justify-content: center; padding: 1.5rem;
+}
+.modal.open { display: flex; }
+.mi {
+  background: white; border-radius: 8px; overflow: hidden;
+  max-width: 900px; width: 100%; box-shadow: var(--shadow-lg);
+  max-height: 90vh; display: flex; flex-direction: column;
+}
+.mh {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: .9rem 1.25rem; border-bottom: 1px solid var(--rule); background: var(--paper);
+}
+.mt { font-family: var(--mono); font-size: 12px; letter-spacing: .06em; color: var(--ink2); }
+.mc {
+  background: none; border: none; cursor: pointer;
+  font-size: 20px; color: var(--ink3); line-height: 1; padding: 2px 6px; border-radius: 4px;
+}
+.mc:hover { background: var(--paper2); }
+.mb { flex: 1; overflow: auto; display: flex; align-items: center; justify-content: center; padding: 1rem; background: var(--paper2); }
+.mb img { max-width: 100%; max-height: 75vh; object-fit: contain; }
+
+/* ── TABLES ── */
+.tbl { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.tbl th {
+  text-align: left; font-family: var(--mono); font-size: 10px;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--ink3);
+  padding: 8px 12px; border-bottom: 2px solid var(--rule); background: var(--paper2);
+}
+.tbl td { padding: 9px 12px; border-bottom: 1px solid var(--paper3); color: var(--ink2); }
+.tbl tr:hover td { background: var(--paper2); }
+.tbl code {
+  font-family: var(--mono); font-size: 12px;
+  background: var(--paper3); padding: 1px 6px; border-radius: 3px; color: var(--ink);
+}
+.tbl a { color: var(--blue2); text-decoration: none; }
+.tbl a:hover { text-decoration: underline; }
+.badge {
+  font-family: var(--mono); font-size: 9.5px; padding: 2px 7px;
+  border-radius: 10px; font-weight: 500; letter-spacing: .04em; white-space: nowrap;
+}
+.bd { background: var(--bl);  color: var(--blue); }
+.bg { background: var(--gl);  color: var(--green); }
+.ba { background: var(--al);  color: var(--amber); }
+.br { background: var(--rl);  color: var(--red); }
+
+/* ── CALLOUT ── */
+.callout {
+  border-left: 4px solid var(--blue); border-radius: 0 var(--r) var(--r) 0;
+  padding: 1rem 1.25rem; margin: 1.25rem 0; font-size: 14.5px;
+  background: var(--bl);
+}
+.callout p { color: var(--blue); margin-bottom: 0; }
+.callout.cg { background: var(--gl); border-left-color: var(--green); }
+.callout.cg p { color: var(--green); }
+.callout.ca { background: var(--al); border-left-color: var(--amber); }
+.callout.ca p { color: var(--amber); }
+
+/* ── CODE BLOCK ── */
+.cb {
+  background: var(--ink); color: #E8E3D8; font-family: var(--mono);
+  font-size: 12.5px; line-height: 1.7; padding: 1.25rem 1.5rem;
+  border-radius: var(--r); overflow-x: auto; margin: 1rem 0;
+}
+.cm { color: #888; }
+
+/* ── DATA EXPLORER CTA ── */
+.de-cta {
+  display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+  background: white; border: 1px solid var(--rule); border-radius: var(--r);
+  padding: 1.5rem 1.75rem; box-shadow: var(--shadow); margin-top: 1.25rem;
+}
+.de-icon { font-size: 2.5rem; flex-shrink: 0; }
+.de-text h3 { font-size: 1rem; margin: 0 0 .3rem; }
+.de-text p { font-size: 13.5px; color: var(--ink3); margin: 0; }
+.de-btn {
+  margin-left: auto; background: var(--blue); color: white; text-decoration: none;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+  padding: 10px 20px; border-radius: var(--r); white-space: nowrap;
+  transition: background .15s; flex-shrink: 0;
+}
+.de-btn:hover { background: var(--blue2); color: white; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink); color: rgba(255,255,255,.55);
+  padding: 2.5rem 2rem; font-size: 13px; font-family: var(--mono);
+  letter-spacing: .03em; margin-top: 4rem;
+}
+.fi {
+  max-width: 900px; margin: 0 auto;
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem;
+}
+footer a { color: rgba(255,255,255,.75); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .hi { padding: 2.5rem 1.25rem 2rem; }
+  main { padding: 0 1.25rem 3rem; }
+  .sg { grid-template-columns: repeat(2,1fr); }
+  .fg { grid-template-columns: 1fr; }
+  .de-cta { flex-direction: column; align-items: flex-start; }
+  .de-btn { margin-left: 0; }
+  .tbl { font-size: 12px; }
+  .tbl th, .tbl td { padding: 7px 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="hx"></div>
+  <div class="hi">
+    <div class="kicker">Working paper &mdash; June 2026</div>
+    <h1>Legal Cooperative Adoption Under Law&nbsp;13-21:<br>Evidence from Rif Farmer Households</h1>
+    <div class="hmeta">
+      <span>&#9998;&nbsp; Your Name</span>
+      <span>&#127979;&nbsp; Your University</span>
+      <span>&#9993;&nbsp; your.email@university.edu</span>
+    </div>
+    <div class="tags">
+      <span class="tag">Morocco</span>
+      <span class="tag">Rif Region</span>
+      <span class="tag">Cannabis Legalization</span>
+      <span class="tag">Law 13-21</span>
+      <span class="tag">Logistic Regression</span>
+      <span class="tag">Propensity Score Matching</span>
+      <span class="tag">Open Data</span>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <div class="ni">
+    <a href="#abstract">Abstract</a>
+    <a href="#stats">Key Stats</a>
+    <a href="#figures">Figures</a>
+    <a href="#data">Data &amp; Code</a>
+    <a href="#methods">Methods</a>
+    <a href="#findings">Findings</a>
+    <a href="#reproduce">Reproduce</a>
+    <a href="data.html">Data Explorer</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ABSTRACT -->
+  <section id="abstract">
+    <h2><span class="sn">01</span> Abstract</h2>
+    <p>Morocco enacted Law 13-21 in 2021, becoming the first historically illicit hashish-producing nation to establish a legal cannabis framework. This study examines the determinants of legal cooperative adoption among Rif Mountain farmers using a household survey of <strong>800 households</strong> across Chefchaouen, Al-Hoceima, and Ouazzane provinces.</p>
+    <p>We estimate three nested logistic regression models with heteroskedasticity-robust standard errors and propensity score matching (PSM) to identify barriers to formalization and quantify the causal income effect of joining the legal market. Overall adoption stands at <strong>17.1%</strong>, with significant variation by province, distance to ANRAC offices, prior arrest history, and access to legal market information.</p>
+    <div class="callout cg">
+      <p><strong>Key finding:</strong> Farmers who joined legal cooperatives experienced a mean income gain of <strong>+31.2%</strong> relative to propensity-score matched controls in the illicit market, suggesting meaningful livelihood benefits from formalization &mdash; though the majority of Rif farmers remain outside the legal framework.</p>
+    </div>
+  </section>
+
+  <!-- KEY STATS -->
+  <section id="stats">
+    <h2><span class="sn">02</span> Key Statistics</h2>
+    <div class="sg">
+      <div class="stat"><div class="sv">800</div><div class="sl">Households surveyed</div></div>
+      <div class="stat"><div class="sv">17.1%</div><div class="sl">Legal adoption rate</div></div>
+      <div class="stat"><div class="sv g">+31.2%</div><div class="sl">Income gain (PSM)</div></div>
+      <div class="stat"><div class="sv">42.3 km</div><div class="sl">Avg distance to ANRAC</div></div>
+      <div class="stat"><div class="sv">3,029</div><div class="sl">Licenses issued (2024)</div></div>
+      <div class="stat"><div class="sv">2,700</div><div class="sl">Legal hectares (2024)</div></div>
+      <div class="stat"><div class="sv">206</div><div class="sl">Active cooperatives</div></div>
+      <div class="stat"><div class="sv">1.24 ha</div><div class="sl">Avg land holding</div></div>
+    </div>
+    <div class="callout ca">
+      <p><strong>Provincial variation:</strong> Adoption is highest in Chefchaouen (18.6%) and lowest in Ouazzane (10.7%), consistent with differential proximity to ANRAC offices and pre-existing cooperative infrastructure.</p>
+    </div>
+  </section>
+
+  <!-- FIGURES -->
+  <section id="figures">
+    <h2><span class="sn">03</span> Figures</h2>
+    <p>All figures are 300&nbsp;DPI PDF/PNG, journal-ready. Click any figure to enlarge.</p>
+    <div class="fg">
+
+      <div class="fc" onclick="openFig('https://raw.githubusercontent.com/hsmalling/research/main/figures/morocco_cannabis_pub_figure1_legal_market.png','Figure 1: Legal Market Growth 2021-2024')">
+        <div class="fp" style="background-image:url('https://raw.githubusercontent.com/hsmalling/research/main/figures/morocco_cannabis_pub_figure1_legal_market.png')"><div class="fo"><span>Click to enlarge</span></div></div>
+        <div class="fb"><div class="fn">Figure 1</div><div class="ft">Legal Market Growth 2021&ndash;2024</div><p class="fd">ANRAC license and cultivation data showing the rapid expansion of the legal cannabis sector.</p><a href="https://raw.githubusercontent.com/hsmalling/research/main/figures/morocco_cannabis_pub_figure1_legal_market.png" download class="fdl" onclick="event.stopPropagation()">Download PNG</a></div>
+      </div>
+
+      <div class="fc" onclick="openFig('https://raw.githubusercontent.com/hsmalling/research/main/figures/morocco_cannabis_pub_figure2_adoption_barriers.png','Figure 2: Adoption Rate and Key Barriers')">
+        <div class="fp" style="background-image:url('https://raw.githubusercontent.com/hsmalling/research/main/figures/morocco_cannabis_pub_figure2_adoption_barriers.png')"><div class="fo"><span>Click to enlarge</span></div></div>
+        <div class="fb"><div class="fn">Figure 2</div><div class="ft">Adoption Rate and Key Barriers</div><p class="fd">Provincial variation, distance gradient, and education gradient in cooperative adoption.</p><a href="https://raw.githubusercontent.com/hsmalling/research/main/figures/morocco_cannabis_pub_figure2_adoption_barriers.png" download class="fdl" onclick="event.stopPropagation()">Download PNG</a></div>
+      </div>
+
+      <div class="fc" onclick="openFig('https://raw.githubusercontent.com/hsmalling/research/main/figures/morocco_cannabis_pub_figure3_marginal_effects.png','Figure 3: Marginal Effects (Main Results)')">
+        <div class="fp" style="background-image:url('https://raw.githubusercontent.com/hsmalling/research/main/figures/morocco_cannabis_pub_figure3_marginal_effects.png')"><div class="fo"><span>Click to enlarge</span></div></div>
+        <div class="fb"><div class="fn">Figure 3</div><div class="ft">Marginal Effects (Main Results)</div><p class="fd">Average marginal effects from the full logistic model with 95% confidence intervals.</p><a href="https://raw.githubusercontent.com/hsmalling/research/main/figures/morocco_cannabis_pub_figure3_marginal_effects.png" download class="fdl" onclick="event.stopPropagation()">Download PNG</a></div>
+      </div>
+
+      <div class="fc" onclick="openFig('https://raw.githubusercontent.com/hsmalling/research/main/figures/morocco_cannabis_pub_figure4_subgroups.png','Figure 4: Subgroup Adoption Rates')">
+        <div class="fp" style="background-image:url('https://raw.githubusercontent.com/hsmalling/research/main/figures/morocco_cannabis_pub_figure4_subgroups.png')"><div class="fo"><span>Click to enlarge</span></div></div>
+        <div class="fb"><div class="fn">Figure 4</div><div class="ft">Subgroup Adoption Rates</div><p class="fd">Adoption rates by province, gender, prior arrest status, and education level.</p><a href="https://raw.githubusercontent.com/hsmalling/research/main/figures/morocco_cannabis_pub_figure4_subgroups.png" download class="fdl" onclick="event.stopPropagation()">Download PNG</a></div>
+      </div>
+
+      <div class="fc" onclick="openFig('https://raw.githubusercontent.com/hsmalling/research/main/figures/morocco_cannabis_pub_figure5_income_change.png','Figure 5: Income Change Analysis')">
+        <div class="fp" style="background-image:url('https://raw.githubusercontent.com/hsmalling/research/main/figures/morocco_cannabis_pub_figure5_income_change.png')"><div class="fo"><span>Click to enlarge</span></div></div>
+        <div class="fb"><div class="fn">Figure 5</div><div class="ft">Income Change Analysis</div><p class="fd">Distribution of income change and PSM causal estimate of the cooperative income premium.</p><a href="https://raw.githubusercontent.com/hsmalling/research/main/figures/morocco_cannabis_pub_figure5_income_change.png" download class="fdl" onclick="event.stopPropagation()">Download PNG</a></div>
+      </div>
+
+      <div class="fc" onclick="openFig('https://raw.githubusercontent.com/hsmalling/research/main/figures/morocco_cannabis_pub_figure6_psm_balance.png','Figure 6: PSM Balance Check')">
+        <div class="fp" style="background-image:url('https://raw.githubusercontent.com/hsmalling/research/main/figures/morocco_cannabis_pub_figure6_psm_balance.png')"><div class="fo"><span>Click to enlarge</span></div></div>
+        <div class="fb"><div class="fn">Figure 6 (Appendix)</div><div class="ft">PSM Covariate Balance Check</div><p class="fd">Love plot and propensity score overlap validating the matching procedure.</p><a href="https://raw.githubusercontent.com/hsmalling/research/main/figures/morocco_cannabis_pub_figure6_psm_balance.png" download class="fdl" onclick="event.stopPropagation()">Download PNG</a></div>
+      </div>
+
+      <div class="fc" onclick="openFig('https://raw.githubusercontent.com/hsmalling/research/main/figures/morocco_cannabis_pub_figure7_unodc_emcdda.png','Figure 7: Morocco in Global Context')">
+        <div class="fp" style="background-image:url('https://raw.githubusercontent.com/hsmalling/research/main/figures/morocco_cannabis_pub_figure7_unodc_emcdda.png')"><div class="fo"><span>Click to enlarge</span></div></div>
+        <div class="fb"><div class="fn">Figure 7</div><div class="ft">Morocco in Global Context</div><p class="fd">UNODC production trends and EMCDDA European market data framing the study context.</p><a href="https://raw.githubusercontent.com/hsmalling/research/main/figures/morocco_cannabis_pub_figure7_unodc_emcdda.png" download class="fdl" onclick="event.stopPropagation()">Download PNG</a></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DATA AND CODE -->
+  <section id="data">
+    <h2><span class="sn">04</span> Data &amp; Code</h2>
+    <div class="callout">
+      <p><strong>Open science:</strong> All data and analysis code are publicly available. The full pipeline runs in Google Colab with zero local setup. <a href="https://github.com/hsmalling/research" style="color:var(--blue)">View on GitHub &rarr;</a></p>
+    </div>
+
+    <div class="de-cta">
+      <div class="de-icon">&#128202;</div>
+      <div class="de-text">
+        <h3>Interactive Data Explorer</h3>
+        <p>Browse, search, sort, and download all 9 datasets directly in your browser &mdash; no login required, works on any device.</p>
+      </div>
+      <a href="data.html" class="de-btn">Open Data Explorer &rarr;</a>
+    </div>
+
+    <h3>Datasets</h3>
+    <table class="tbl">
+      <thead><tr><th>File</th><th>Description</th><th>Rows</th><th>Type</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://github.com/hsmalling/research/blob/main/data/morocco_cannabis_master.csv"><code>master.csv</code></a></td><td>Primary analysis file &mdash; all variables merged</td><td>800</td><td><span class="badge bd">DATA</span></td></tr>
+        <tr><td><a href="https://github.com/hsmalling/research/blob/main/data/morocco_cannabis_survey_clean.csv"><code>survey_clean.csv</code></a></td><td>Cleaned household survey</td><td>800</td><td><span class="badge bd">DATA</span></td></tr>
+        <tr><td><a href="https://github.com/hsmalling/research/blob/main/data/morocco_cannabis_anrac_clean.csv"><code>anrac_clean.csv</code></a></td><td>ANRAC license and production data 2021&ndash;2024</td><td>4</td><td><span class="badge bd">DATA</span></td></tr>
+        <tr><td><a href="https://github.com/hsmalling/research/blob/main/data/morocco_cannabis_unodc_clean.csv"><code>unodc_clean.csv</code></a></td><td>UNODC cannabis production estimates 1998&ndash;2023</td><td>26</td><td><span class="badge bd">DATA</span></td></tr>
+        <tr><td><a href="https://github.com/hsmalling/research/blob/main/data/morocco_cannabis_emcdda_panel.csv"><code>emcdda_panel.csv</code></a></td><td>EMCDDA European hashish market panel</td><td>84</td><td><span class="badge bd">DATA</span></td></tr>
+        <tr><td><a href="https://github.com/hsmalling/research/blob/main/data/morocco_cannabis_codebook.csv"><code>codebook.csv</code></a></td><td>Variable codebook &mdash; all 23 variables documented</td><td>23</td><td><span class="badge bd">DATA</span></td></tr>
+      </tbody>
+    </table>
+
+    <h3>Analysis Outputs</h3>
+    <table class="tbl">
+      <thead><tr><th>File</th><th>Description</th><th>Type</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://github.com/hsmalling/research/blob/main/data/morocco_cannabis_table1.csv"><code>table1.csv</code></a></td><td>Table 1: Descriptive statistics by market participation</td><td><span class="badge br">TABLE</span></td></tr>
+        <tr><td><a href="https://github.com/hsmalling/research/blob/main/data/morocco_cannabis_table2.tex"><code>table2.tex</code></a></td><td>Table 2: Logistic regression results (LaTeX / Overleaf ready)</td><td><span class="badge br">LATEX</span></td></tr>
+        <tr><td><a href="https://github.com/hsmalling/research/blob/main/data/morocco_cannabis_logit_mfx.csv"><code>logit_mfx.csv</code></a></td><td>Average marginal effects from Model 3</td><td><span class="badge br">TABLE</span></td></tr>
+        <tr><td><a href="https://github.com/hsmalling/research/blob/main/data/morocco_cannabis_psm_results.csv"><code>psm_results.csv</code></a></td><td>Propensity score matching ATT estimates</td><td><span class="badge br">TABLE</span></td></tr>
+        <tr><td><a href="https://github.com/hsmalling/research/blob/main/data/morocco_cannabis_subgroup_analysis.csv"><code>subgroup_analysis.csv</code></a></td><td>Adoption rates by subgroup with 95% CIs</td><td><span class="badge br">TABLE</span></td></tr>
+      </tbody>
+    </table>
+
+    <h3>Analysis Notebooks</h3>
+    <table class="tbl">
+      <thead><tr><th>Notebook</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://github.com/hsmalling/research/blob/main/notebooks/morocco_cannabis_01_data.ipynb"><code>01_data.ipynb</code></a></td><td>Data acquisition &mdash; World Bank API, ANRAC, UNODC, EMCDDA, survey</td></tr>
+        <tr><td><a href="https://github.com/hsmalling/research/blob/main/notebooks/morocco_cannabis_02_clean.ipynb"><code>02_clean.ipynb</code></a></td><td>Cleaning, validation, master file construction</td></tr>
+        <tr><td><a href="https://github.com/hsmalling/research/blob/main/notebooks/morocco_cannabis_03_eda.ipynb"><code>03_eda.ipynb</code></a></td><td>Exploratory analysis and Table 1</td></tr>
+        <tr><td><a href="https://github.com/hsmalling/research/blob/main/notebooks/morocco_cannabis_04_model.ipynb"><code>04_model.ipynb</code></a></td><td>Logistic regression, subgroup analysis, PSM, OLS income model</td></tr>
+        <tr><td><a href="https://github.com/hsmalling/research/blob/main/notebooks/morocco_cannabis_05_figures.ipynb"><code>05_figures.ipynb</code></a></td><td>All 7 publication figures</td></tr>
+        <tr><td><a href="https://github.com/hsmalling/research/blob/main/notebooks/morocco_cannabis_06_export.ipynb"><code>06_export.ipynb</code></a></td><td>Final export, README, codebook, push</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- METHODS -->
+  <section id="methods">
+    <h2><span class="sn">05</span> Methods Summary</h2>
+    <h3>Sample</h3>
+    <p>Household survey of <strong>800 cannabis farming households</strong> across three Rif Mountain provinces: Chefchaouen (n=360), Al-Hoceima (n=280), and Ouazzane (n=160). The unit of analysis is the household; the household head is the respondent.</p>
+    <h3>Statistical Models</h3>
+    <p>Three nested logistic regression models predicting cooperative adoption, all with HC3 heteroskedasticity-robust standard errors. The full model (Model 3) includes land size, distance to ANRAC, education, age, household income, prior arrests, years of cannabis cultivation, irrigation access, and province fixed effects. Average marginal effects are reported throughout.</p>
+    <p>For causal inference on income effects, 1:1 nearest-neighbor propensity score matching without replacement estimates the Average Treatment Effect on the Treated (ATT). Covariate balance is assessed using standardised mean differences (SMD &lt; 0.10 threshold).</p>
+    <h3>Data Sources</h3>
+    <table class="tbl">
+      <thead><tr><th>Source</th><th>Data</th><th>Access</th></tr></thead>
+      <tbody>
+        <tr><td>Primary survey</td><td>Farmer household characteristics, income, cooperative status</td><td>This repository</td></tr>
+        <tr><td>ANRAC</td><td>License counts, hectares, cooperatives 2021&ndash;2024</td><td><a href="https://www.anrac.gov.ma">anrac.gov.ma</a></td></tr>
+        <tr><td>UNODC World Drug Report</td><td>Illicit cultivation and production 1998&ndash;2023</td><td><a href="https://unodc.org/unodc/en/data-and-analysis/wdr.html">unodc.org</a></td></tr>
+        <tr><td>EMCDDA</td><td>European hashish seizures, prices, origin attribution</td><td><a href="https://emcdda.europa.eu/data/stats">emcdda.europa.eu</a></td></tr>
+        <tr><td>World Bank API</td><td>Morocco macro indicators (poverty, GDP, agriculture)</td><td><a href="https://data.worldbank.org/country/morocco">data.worldbank.org</a></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- FINDINGS -->
+  <section id="findings">
+    <h2><span class="sn">06</span> Key Findings</h2>
+    <h3>1. Adoption is low but regionally concentrated</h3>
+    <p>Overall 17.1% of surveyed households joined a legal cooperative. Adoption is highest in Chefchaouen (18.6%) and lowest in Ouazzane (10.7%), consistent with differential proximity to ANRAC offices and pre-existing cooperative infrastructure.</p>
+    <h3>2. Distance is the strongest access barrier</h3>
+    <p>Households in the furthest distance quartile from ANRAC offices are significantly less likely to formalize, after controlling for land size, education, income, and criminal history. This points to an infrastructure gap addressable by expanding ANRAC field offices in remote Rif communities.</p>
+    <h3>3. Prior arrests reduce adoption</h3>
+    <p>Each prior cannabis-related arrest reduces the probability of joining a legal cooperative, consistent with distrust of state institutions among farmers with criminal histories. This has implications for the 2024 royal pardon of approximately 4,800 cannabis-convicted farmers.</p>
+    <h3>4. Legal participation generates income gains</h3>
+    <p>PSM-estimated ATT indicates legal cooperative members earn a mean income premium of <strong>+31.2%</strong> relative to propensity-score matched non-members, suggesting meaningful economic returns to formalization.</p>
+    <div class="callout">
+      <p><strong>Policy implication:</strong> Expanding ANRAC office coverage, simplifying the application process, and combining legalization with criminal record relief are likely to substantially increase formalization rates among Rif farmers.</p>
+    </div>
+  </section>
+
+  <!-- REPRODUCE -->
+  <section id="reproduce">
+    <h2><span class="sn">07</span> Reproduce This Study</h2>
+    <p>The entire analysis runs in Google Colab. No local installation required.</p>
+    <div class="cb">
+<span class="cm"># 1. Clone this repository</span>
+git clone https://github.com/hsmalling/research.git
+
+<span class="cm"># 2. Open in Google Colab</span>
+<span class="cm"># colab.research.google.com -> File -> Open -> GitHub -> paste URL</span>
+
+<span class="cm"># 3. Run notebooks in order</span>
+00_master_setup.ipynb    <span class="cm"># install packages, connect GitHub</span>
+01_data.ipynb            <span class="cm"># acquire all data</span>
+02_clean.ipynb           <span class="cm"># clean and validate</span>
+03_eda.ipynb             <span class="cm"># exploratory analysis</span>
+04_model.ipynb           <span class="cm"># statistical models</span>
+05_figures.ipynb         <span class="cm"># publication figures</span>
+06_export.ipynb          <span class="cm"># push to GitHub</span>
+    </div>
+    <div class="callout cg">
+      <p><strong>Reproducibility statement:</strong> All data and analysis code are publicly available at <a href="https://github.com/hsmalling/research" style="color:var(--green)">github.com/hsmalling/research</a>. The analysis was conducted in Python 3.10 and R 4.x using Google Colab. All notebooks include self-contained path bootstrap cells and install all required dependencies automatically.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- MODAL -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Figure viewer">
+  <div class="mi">
+    <div class="mh">
+      <span class="mt" id="modal-title"></span>
+      <button class="mc" onclick="closeFig()" aria-label="Close">&times;</button>
+    </div>
+    <div class="mb"><img id="modal-img" src="" alt=""></div>
+  </div>
+</div>
+
+<footer>
+  <div class="fi">
+    <span>Your Name &mdash; Your University</span>
+    <span>
+      <a href="https://github.com/hsmalling/research">GitHub</a> &nbsp;&bull;&nbsp;
+      <a href="data.html">Data Explorer</a> &nbsp;&bull;&nbsp;
+      <a href="https://github.com/hsmalling/research/blob/main/data/morocco_cannabis_codebook.csv">Codebook</a>
+    </span>
+    <span>Updated June 2026 &mdash; CC BY 4.0</span>
+  </div>
+</footer>
+
+<script>
+function openFig(src,title){
+  document.getElementById('modal-img').src=src;
+  document.getElementById('modal-title').textContent=title;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeFig(){
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('modal').addEventListener('click',function(e){
+  if(e.target===this)closeFig();
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape')closeFig();
+});
+</script>
+
+</body>
+</html>
