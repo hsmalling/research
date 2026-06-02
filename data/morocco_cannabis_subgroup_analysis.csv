@@ -1,0 +1,15 @@
+Group,N,Rate,CI_lo,CI_hi,subgroup
+Chefchaouen,651,0.186,0.156,0.216,province
+Ouazzane,149,0.107,0.058,0.157,province
+Male,638,0.172,0.143,0.202,gender
+Female,162,0.167,0.109,0.224,gender
+No prior arrest,405,0.21,0.17,0.25,prior_arrest
+Prior arrest,395,0.132,0.098,0.165,prior_arrest
+Tertiary (10+),117,0.274,0.193,0.354,education
+Secondary (7-9),165,0.218,0.155,0.281,education
+Primary (1-6),398,0.146,0.111,0.18,education
+None (0 yrs),120,0.092,0.04,0.143,education
+Q4 largest,197,0.289,0.226,0.353,land_size
+Q2,198,0.162,0.11,0.213,land_size
+Q3,201,0.144,0.096,0.193,land_size
+Q1 smallest,204,0.093,0.053,0.133,land_size

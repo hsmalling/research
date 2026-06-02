@@ -1,0 +1,24 @@
+Variable,Description,Type,Units,Range,Notes
+household_id,Unique household identifier,Integer,N/A,1 to n,Primary key
+survey_year,Year of survey,Integer,N/A,2023,All 2023
+joined_legal_cooperative,Joined ANRAC-licensed cooperative under Law 13-21,Binary,"0=No, 1=Yes","0, 1",Primary outcome
+age,Age of household head in years,Continuous,Years,18-90,Winsorized 1-99th pct
+gender,Gender of household head,Categorical,Male/Female/NB,--,
+education_yrs,Completed years of formal education,Continuous,Years,0-20,
+household_size,Number of persons in household,Integer,Persons,1-20,
+land_size_ha,Agricultural land holding size,Continuous,Hectares,0.1-20,Winsorized 1-99th pct
+years_growing_cannabis,Years household has grown cannabis,Integer,Years,1-50,Winsorized 1-99th pct
+irrigation_access,Household has access to irrigation,Binary,"0=No, 1=Yes","0, 1",
+distance_to_anrac_km,Distance to nearest ANRAC office,Continuous,Kilometers,5-100,Winsorized 1-99th pct
+info_access_legal,Awareness of legal market application process,Binary,"0=No, 1=Yes","0, 1",
+prior_arrests,Number of prior cannabis-related arrests,Integer,Count,0-5,
+any_prior_arrest,Any prior cannabis-related arrest (derived),Binary,"0=No, 1=Yes","0, 1",Derived from prior_arrests
+household_income_usd,Annual household income before Law 13-21 (USD),Continuous,USD,400-8000,Winsorized 1-99th pct
+income_post_law_usd,Annual household income after Law 13-21 (USD),Continuous,USD,400-10000,Winsorized 1-99th pct
+income_change_pct,Pct change in income post-law (derived),Continuous,Percent,-50 to +100,Derived
+log_income,Natural log of pre-law income (derived),Continuous,Log USD,--,log1p transformation
+region,Province in Rif region,Categorical,Province name,Chefchaouen etc,Reference: Chefchaouen
+macro_gdp_per_capita,Morocco GDP per capita (World Bank),Continuous,USD,--,Survey year value
+macro_poverty_rate,National poverty headcount ratio (World Bank),Continuous,Percent,--,Survey year value
+anrac_legal_hectares,Total legal hectares in survey year (ANRAC),Continuous,Hectares,--,Merged from ANRAC
+anrac_pct_legal,Legal market share in survey year (ANRAC),Continuous,Percent,--,Merged from ANRAC
